@@ -1,0 +1,39 @@
+==amino_acid_catabolism==
+  E:['ALT', 'AST', 'GDH', 'PDC', 'PCC']
+  M:['ala', 'glu', 'akg', 'oaa_aa', 'pyr_aa', 'nh3', 'urea_m']
+==urea_cycle==
+  E:['CPS1', 'OTC', 'ASS', 'ASL', 'ARG1']
+  M:['nh3_uc', 'carp_uc', 'citr_uc', 'argsuc_uc', 'arg_uc', 'orn_uc', 'urea_uc', 'fum_uc']
+==phenylalanine_tyrosine==
+  E:['PAH', 'TH', 'AADC', 'DBH', 'TAT', 'HGD', 'FAH', 'TYR']
+  M:['phe', 'tyr', 'dopa', 'da', 'na', 'hga', 'fum_pt', 'acac_pt']
+==branched_chain_aa==
+  E:['BCAT2', 'BCKDH', 'IVD', 'MCC', 'PCC_val', 'MUT']
+  M:['bcaa_in', 'bcka', 'ivcd', 'acetcoa_b', 'succcoa_b', 'ketones_b', 'mma_b']
+==fatty_acid_oxidation==
+  E:['CPT1', 'VLCAD', 'MCAD', 'LHAD', 'THIOLASE']
+  M:['lcfa', 'malonyl', 'acyl_coa', 'acetcoa_f', 'fadh2_f', 'nadh_f', 'ketone_f']
+==ketogenesis==
+  E:['HMGCS2', 'HMGCL', 'BDH1', 'SCOT', 'ACAT1']
+  M:['acac', 'bhb', 'acetone', 'hmgcoa', 'acac_coa']
+==fatty_acid_synthesis==
+  E:['ACC1', 'FASN', 'CLY', 'ME1']
+  M:['acetcoa_s', 'malonyl_s', 'nadph_s', 'palm_s', 'tg_s']
+==cholesterol_synthesis==
+  E:['HMGCR', 'MVK', 'SQLE', 'DHCR7', 'FPS']
+  M:['hmgcoa_c', 'meval_c', 'ipp_c', 'fpp_c', 'squalene', 'chol_c', 'dolichol', 'uq_c']
+==lipoprotein_metabolism==
+  E:['LPL', 'LDLR', 'PCSK9', 'LCAT', 'ABCA1', 'HTGL']
+  M:['cm', 'vldl', 'ldl', 'hdl', 'cm_rem', 'tg_pl']
+==purine_synthesis==
+  E:['PPAT', 'GART', 'IMPDH', 'ADSS', 'ADSL']
+  M:['prpp', 'imp', 'amp_de', 'gmp_de', 'xmp']
+==pyrimidine_synthesis==
+  E:['CAD', 'DHODH', 'UMPS', 'TYMS', 'DHFR', 'CTPS1']
+  M:['carbasp', 'dho', 'orotate', 'ump', 'utp', 'ctp', 'dtmp', 'orotic_ac']
+==purine_salvage==
+  E:['HGPRT', 'APRT', 'ADA', 'AK', 'CD73']
+  M:['hx', 'gua', 'aden', 'adosn', 'inosn', 'amp_sv', 'imp_sv']
+==nucleotide_degradation==
+  E:['XO', 'PNP', 'ADA2', 'NT5E', 'DPYD']
+  M:['adosn_d', 'inosn_d', 'hx_d', 'xan_d', 'ua', 'ros_d', 'bala_d']

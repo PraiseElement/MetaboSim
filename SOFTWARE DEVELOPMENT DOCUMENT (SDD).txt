@@ -1,0 +1,359 @@
+SOFTWARE DEVELOPMENT DOCUMENT (SDD)
+Project Title:
+
+MetaboSim: An Interactive Metabolic Pathway Visualizer and Simulator for Biochemistry Education
+
+1. INTRODUCTION
+1.1 Background
+
+Metabolism is arguably one of the most intellectually demanding domains in biochemistry. Students frequently resort to rote memorization. They memorize glycolysis. They memorize the TCA cycle. They memorize pathways without understanding regulation, integration, or physiological relevance. The result is fragile knowledge. It breaks under examination pressure.
+
+In many institutions, particularly in resource-limited environments, teaching methods remain static. Diagrams are drawn on boards. Slides are shown. Yet metabolism is dynamic. It is temporal. It responds to environmental and hormonal cues. A static representation cannot convey flux. It cannot convey adaptation.
+
+MetaboSim will address this educational gap by providing a dynamic and interactive metabolic simulation environment. It will allow users to explore, manipulate, and visualize metabolic responses under various physiological and pathological conditions.
+
+1.2 Problem Statement
+
+There is currently a lack of accessible, interactive tools that:
+
+Demonstrate metabolic regulation dynamically.
+
+Integrate multiple pathways into a unified system.
+
+Provide physiological context.
+
+Support African and global curricula.
+
+Enable experiential learning.
+
+Students therefore struggle with:
+
+Conceptual understanding.
+
+Clinical integration.
+
+Retention.
+
+Application in research and medicine.
+
+1.3 Objectives
+
+The primary objective is to develop a web-based educational platform that:
+
+Simulates metabolic pathway dynamics.
+
+Demonstrates regulatory mechanisms.
+
+Allows parameter manipulation.
+
+Connects biochemical processes to real-life physiology and disease.
+
+Secondary objectives include:
+
+Enhancing critical thinking.
+
+Supporting medical and life science students.
+
+Enabling self-paced learning.
+
+Reducing cognitive overload.
+
+1.4 Scope
+
+The system will initially focus on:
+
+Glycolysis.
+
+Gluconeogenesis.
+
+Citric Acid Cycle.
+
+Oxidative Phosphorylation.
+
+Future expansion may include:
+
+Lipid metabolism.
+
+Amino acid metabolism.
+
+Hormonal integration.
+
+Cancer metabolism.
+
+Radiochemistry and metabolic imaging (this aligns, perhaps subtly, with your new role in nuclear medicine).
+
+2. SYSTEM OVERVIEW
+4
+
+MetaboSim will consist of:
+
+Visualization engine.
+
+Simulation engine.
+
+User interaction layer.
+
+Educational analytics module.
+
+The system will be modular. Each pathway is a module. This improves scalability.
+
+3. FUNCTIONAL REQUIREMENTS
+3.1 User Authentication
+
+Optional login.
+
+Guest mode available.
+
+Student and educator profiles.
+
+3.2 Pathway Visualization
+
+The system must:
+
+Display interactive pathway maps.
+
+Highlight active/inactive reactions.
+
+Show enzyme regulation in real time.
+
+Users should:
+
+Click enzymes to view regulation.
+
+See cofactors and intermediates.
+
+Access molecular details.
+
+3.3 Dynamic Simulation
+
+Users should manipulate:
+
+Substrate concentration.
+
+Oxygen availability.
+
+Hormone levels.
+
+Energy demand.
+
+Nutritional states.
+
+Examples:
+
+Fasting.
+
+Exercise.
+
+Diabetes.
+
+Hypoxia.
+
+The model will calculate:
+
+Flux changes.
+
+ATP yield.
+
+Metabolite accumulation.
+
+3.4 Educational Feedback
+
+The system will:
+
+Provide explanations.
+
+Detect misconceptions.
+
+Suggest learning modules.
+
+3.5 Clinical Integration
+
+Users may:
+
+Simulate metabolic disorders.
+
+Observe biochemical consequences.
+
+Examples:
+
+Lactic acidosis.
+
+Mitochondrial diseases.
+
+Cancer metabolism.
+
+3.6 Quiz and Assessment
+
+Adaptive questions.
+
+Scenario-based.
+
+Instant feedback.
+
+4. NON-FUNCTIONAL REQUIREMENTS
+4.1 Usability
+
+Simple interface.
+
+Mobile-friendly.
+
+Low bandwidth mode.
+
+4.2 Performance
+
+Fast rendering.
+
+Efficient simulation.
+
+4.3 Scalability
+
+Cloud-ready.
+
+Modular architecture.
+
+4.4 Security
+
+Data protection.
+
+Secure login.
+
+5. SYSTEM ARCHITECTURE
+5.1 Frontend
+
+Possible technologies:
+
+React or Next.js.
+
+D3.js for visualization.
+
+WebGL for advanced graphics.
+
+5.2 Backend
+
+Python (FastAPI or Django).
+
+Simulation engine in Python.
+
+5.3 Database
+
+PostgreSQL.
+
+Graph database for pathways.
+
+5.4 Cloud
+
+AWS or Azure.
+
+CDN for global access.
+
+6. SIMULATION ENGINE DESIGN
+
+This is the intellectual core.
+
+6.1 Modeling Approach
+
+Options:
+
+Ordinary differential equations.
+
+Flux balance analysis.
+
+Systems biology hybrid models.
+
+Initially:
+
+Simplified kinetic models.
+
+Later:
+
+Advanced physiological modeling.
+
+6.2 Data Sources
+
+KEGG.
+
+Reactome.
+
+BRENDA.
+
+6.3 Algorithm
+
+Steps:
+
+User inputs parameters.
+
+System updates flux.
+
+Visualization updates.
+
+Feedback generated.
+
+7. USER EXPERIENCE DESIGN
+
+Key principles:
+
+Cognitive simplicity.
+
+Visual clarity.
+
+Progressive complexity.
+
+The interface will have:
+
+Dashboard.
+
+Simulation panel.
+
+Pathway map.
+
+Learning sidebar.
+
+8. DEVELOPMENT ROADMAP
+Phase 1
+
+Glycolysis visualizer.
+
+Basic simulation.
+
+Phase 2
+
+Hormonal regulation.
+
+Phase 3
+
+Multi-pathway integration.
+
+Phase 4
+
+Clinical module.
+
+9. TESTING
+
+Types:
+
+Unit testing.
+
+Model validation.
+
+Educational effectiveness.
+
+10. MONETIZATION
+
+Possible models:
+
+Freemium.
+
+Institutional licenses.
+
+Premium clinical modules.
+
+11. IMPACT
+
+If successful, MetaboSim could:
+
+Transform metabolic education.
+
+Support global learning.
+
+Improve research training.
+
