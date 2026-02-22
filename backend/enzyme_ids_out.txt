@@ -1,0 +1,12 @@
+HK|||Hexokinase
+PGI|||Phosphoglucose Isomerase
+PFK1|||Phosphofructokinase-1
+ALD|||Aldolase
+TPI|||Triose Phosphate Isomerase
+GAPDH|||Glyceraldehyde-3-P Dehydrogenase
+PGK|||Phosphoglycerate Kinase
+PGM|||Phosphoglycerate Mutase
+ENO|||Enolase
+PK|||Pyruvate Kinase
+LDH|||Lactate Dehydrogenase
+PDH|||Pyruvate Dehydrogenase Complex

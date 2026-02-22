@@ -68,9 +68,11 @@ export default function Dashboard({ onNavigate, onSelectPathway }) {
         <h1 style={{ fontSize: '2.8rem', marginBottom: '0.75rem' }}>
           Metabolic Pathway <span style={{ color: 'var(--cyan)' }}>Simulator</span>
         </h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: 680, margin: '0 auto 2rem' }}>
-        interactively simulate and visualise <strong>23 metabolic pathways</strong> across
+        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: 720, margin: '0 auto 2rem' }}>
+          Interactively simulate and visualise <strong>23 metabolic pathways</strong> across
           carbohydrate, amino acid, lipid, and nucleotide metabolism.
+          Every enzyme node shows real-time flux colour, clickable detail modals,
+          and <strong>ATP&nbsp;↑↓ &amp; NADH&nbsp;↑↓ badges</strong> — so energy flow is always visible at a glance.
           Built for clinical biochemistry education.
         </p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -164,7 +166,7 @@ export default function Dashboard({ onNavigate, onSelectPathway }) {
       }}>
         {[
           { label: 'Pathways',         value: '23',   color: 'var(--cyan)',   icon: '🧭' },
-          { label: 'Enzymes modelled', value: '100+', color: 'var(--green)', icon: '⚙️' },
+          { label: 'Enzymes modelled', value: '150+', color: 'var(--green)', icon: '⚙️' },
           { label: 'Clinical Cases',   value: '50+',  color: 'var(--amber)', icon: '🏥' },
           { label: 'Quiz Questions',   value: '260+', color: 'var(--purple)', icon: '📝' },
         ].map(s => (

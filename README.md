@@ -1,6 +1,6 @@
 # MetaboSim &nbsp; [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue)](https://python.org) [![React 18](https://img.shields.io/badge/React-18-61dafb)](https://react.dev) [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-green)](https://fastapi.tiangolo.com)
 
-> **An interactive biochemistry education platform** — simulate 23 metabolic pathways, explore 134+ enzyme entries with clinical details, work through patient cases, and test yourself with 24 quiz categories.
+> **An interactive biochemistry education platform (v2.0)** — simulate 23 metabolic pathways, explore 150+ enzyme entries with clinical details, work through patient cases with a full-screen modal experience, and test yourself with 24 quiz categories. New in v2.0: per-enzyme ATP↑↓ / NADH↑↓ / FADH₂↑ badges across all pathway maps.
 
 ---
 
@@ -39,19 +39,22 @@ Unlike static textbook diagrams, MetaboSim lets you:
 
 ## Features
 
-| Feature                     | Details                                                                                                                                                        |
-| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **23 Simulation Engines**   | Each pathway has a dedicated Python simulation function returning enzyme flux, metabolite concentrations, ATP yield, educational notes, and scenario detection |
-| **134+ Enzyme Entries**     | Full biochemical profiles: EC number, class, reaction, cofactors, subcellular location, allosteric regulation, PDB ID, and clinical note                       |
-| **Interactive Pathway Map** | Real-time SVG pathway diagrams — enzyme nodes colour-coded by activity (active/allosteric/inhibited)                                                           |
-| **Enzyme Detail Modal**     | Click any enzyme node in the map to open a rich detail popup with clinical pharmacology                                                                        |
-| **Metabolic Scenarios**     | 8+ presets: Fed State, Fasted, Diabetic Hyperglycaemia, Intense Exercise, Liver Failure, Sepsis, Obesity, Starvation                                           |
-| **Clinical Cases Module**   | 50+ vignette-based patient cases linked to specific enzyme defects with diagnostic reasoning                                                                   |
-| **Quiz Module**             | 24 pathway categories with exam-style MCQs (USMLE/PLAB style), instant feedback, and explanations                                                              |
-| **Downloadable Reports**    | PDF-ready ATP Flux Reports generated per simulation — includes metrics, enzyme table, educational notes                                                        |
-| **Dark / Light Mode**       | Full theme system with persisted user preference                                                                                                               |
-| **Mobile Responsive**       | Responsive CSS with breakpoints at 768px and 480px                                                                                                             |
-| **User Guide**              | Built-in interactive guide (Help section) with step-by-step instructions, pathway table, and FAQ                                                               |
+| Feature                              | Details                                                                                                                                                                            |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **23 Simulation Engines**            | Each pathway has a dedicated Python simulation function returning enzyme flux, metabolite concentrations, ATP yield, educational notes, and scenario detection                     |
+| **150+ Enzyme Entries**              | Full biochemical profiles: EC number, class, reaction, cofactors, subcellular location, allosteric regulation, PDB ID, and clinical note                                           |
+| **ATP / NADH / FADH₂ Badges** ⭐ New | Every enzyme node shows colour-coded pills: `ATP↓` (red), `ATP↑` (cyan), `NADH↑` (yellow), `NADH↓` (grey), `FADH₂↑` (orange) — always visible, without needing to run a simulation |
+| **Interactive Pathway Map**          | Real-time SVG pathway diagrams — enzyme nodes colour-coded by activity (active/allosteric/inhibited) and annotated with energy badges                                              |
+| **Enzyme Detail Modal**              | Click any enzyme node in the map to open a rich detail popup with EC number, cofactors, regulation, and clinical pharmacology                                                      |
+| **Clinical Case Modal** ⭐ New       | Clicking a clinical case card opens a full-screen modal with presentation, labs, pathophysiology, and simulation metrics. Dismiss via backdrop or ✕ button                         |
+| **Enzyme Alias Resolution** ⭐ New   | `getEnzymeData` now resolves 20+ ID aliases (PFK1→PFK, ALD→ALDO, ACN→ACON, PGM2/3→PGM, G6P→G6PASE, etc.) ensuring every enzyme click shows full details                            |
+| **Metabolic Scenarios**              | 8+ presets: Fed State, Fasted, Diabetic Hyperglycaemia, Intense Exercise, Liver Failure, Sepsis, Obesity, Starvation                                                               |
+| **Clinical Cases Module**            | 50+ vignette-based patient cases linked to specific enzyme defects with diagnostic reasoning                                                                                       |
+| **Quiz Module**                      | 24 pathway categories with exam-style MCQs (USMLE/PLAB style), instant feedback, and explanations                                                                                  |
+| **Downloadable Reports**             | HTML Flux Reports (v2.0) generated per simulation — includes metrics, enzyme badge legend, metabolite table, and per-pathway biochemical breakdown                                 |
+| **Dark / Light Mode**                | Full theme system with persisted user preference                                                                                                                                   |
+| **Mobile Responsive**                | Responsive CSS with breakpoints at 768px and 480px                                                                                                                                 |
+| **User Guide**                       | Built-in interactive guide (Help section) with step-by-step instructions, pathway table, badge legend, and FAQ                                                                     |
 
 ---
 
@@ -379,7 +382,7 @@ Get quiz questions for a specific pathway category.
 
 ## Enzyme Database
 
-The enzyme database (`frontend/src/utils/enzymeDatabase.js`) contains **134+ enzyme profiles** across all metabolic domains. Each entry includes:
+The enzyme database (`frontend/src/utils/enzymeDatabase.js`) contains **150+ enzyme profiles** across all metabolic domains. Each entry includes:
 
 ```javascript
 HMGCR: {
@@ -492,14 +495,14 @@ npm run build   # confirms no JSX/TS compile errors
 
 > Start both servers and visit http://localhost:5173 to view the full application.
 
-| Section         | Description                                                           |
-| --------------- | --------------------------------------------------------------------- |
-| Dashboard       | Domain tiles + pathway stats                                          |
-| Simulation Page | Left: controls, Centre: Pathway Map, Right: Metrics + Learning        |
-| Enzyme Modal    | Click any enzyme node → EC number, reaction, cofactors, clinical note |
-| Clinical Cases  | Patient vignettes with diagnostic reasoning                           |
-| Quiz Module     | 24 pathway categories with MCQs and instant explanations              |
-| Guide           | Built-in user manual with full pathway table                          |
+| Section         | Description                                                                    |
+| --------------- | ------------------------------------------------------------------------------ |
+| Dashboard       | Domain tiles + ATP/NADH badge feature highlight + pathway stats                |
+| Simulation Page | Left: controls, Centre: Pathway Map with energy badges, Right: Metrics + Notes |
+| Enzyme Modal    | Click any enzyme node → EC number, reaction, cofactors, clinical note          |
+| Clinical Cases  | Patient vignettes with full-screen detail modal (v2.0 modal overlay)           |
+| Quiz Module     | 24 pathway categories with MCQs and instant explanations                       |
+| Guide           | Built-in user manual with pathway table, badge legend, and FAQ (v2.0 updated)  |
 
 ---
 
@@ -547,7 +550,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 ---
 
 <div align="center">
-  <strong>MetaboSim</strong> · Built with FastAPI + React + ❤️ for Biochemistry Education
+  <strong>MetaboSim v2.0</strong> · Built with FastAPI + React + ❤️ for Biochemistry Education
   <br/>
   <em>© 2026 Chibuike Praise Okechukwu · praizekene1@gmail.com</em>
 </div>

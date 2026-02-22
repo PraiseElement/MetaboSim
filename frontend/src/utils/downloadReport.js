@@ -750,7 +750,7 @@ export function downloadSimulationReport(result, pathway) {
 <body>
 
 <div class="cover">
-  <div class="subtitle">MetaboSim v1.0 — Simulation Report</div>
+  <div class="subtitle">MetaboSim v2.0 — Simulation Report</div>
   <h1>${escHtml(pathwayLabel)} <span>Pathway Analysis</span></h1>
   <div class="meta">
     <div class="meta-item"><label>Generated</label><div class="val">${escHtml(ts)}</div></div>
@@ -801,6 +801,7 @@ ${buildATPBreakdownSection(m, pathway)}
 
 ${enzymes.length > 0 ? `
 <h2>⚙️ Enzyme Activity</h2>
+<p style="font-size:0.78rem;color:#64748b;margin-bottom:0.75rem">Flux bars show relative enzyme activity (0–100%). Colour: <span style="color:#059669;font-weight:700">green</span> = active, <span style="color:#d97706;font-weight:700">amber</span> = allosteric, <span style="color:#dc2626;font-weight:700">red</span> = inhibited. Badges like <span style="background:#ff4d6d33;border:1px solid #ff4d6d;color:#ff6b82;font-size:0.65rem;padding:1px 5px;border-radius:3px">ATP↓</span> <span style="background:#ffcc0022;border:1px solid #ffcc00;color:#b8960a;font-size:0.65rem;padding:1px 5px;border-radius:3px">NADH↑</span> <span style="background:#fb923c22;border:1px solid #fb923c;color:#ea7117;font-size:0.65rem;padding:1px 5px;border-radius:3px">FADH₂↑</span> indicate the energy role of each step on the pathway map.</p>
 <table>
 <thead><tr>
   <th>Enzyme</th><th>ID</th><th>Status</th><th>Flux</th><th style="min-width:140px">Activity</th>
@@ -852,7 +853,7 @@ ${warnings.length > 0 ? `<h2>⚠️ Warnings</h2>${warnings.map(w => `<div class
 ${notes.length > 0 ? `<h2>📚 Educational Notes</h2>${notes.map(n => `<div class="note">💡 ${escHtml(n)}</div>`).join('')}` : ''}
 
 </div>
-<div class="footer">METABOSIM v1.0 — GENERATED ${escHtml(ts.toUpperCase())} — AUTHOR: CHIBUIKE PRAISE OKECHUKWU (praizekene1@gmail.com) — FOR EDUCATIONAL PURPOSES ONLY</div>
+<div class="footer">METABOSIM v2.0 — GENERATED ${escHtml(ts.toUpperCase())} — AUTHOR: CHIBUIKE PRAISE OKECHUKWU (praizekene1@gmail.com) — FOR EDUCATIONAL PURPOSES ONLY</div>
 </body>
 </html>`;
 

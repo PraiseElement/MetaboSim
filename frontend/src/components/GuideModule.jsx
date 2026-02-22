@@ -180,8 +180,9 @@ function OverviewContent() {
   return (
     <>
       <Callout type="tip">
-        <strong>MetaboSim v1.0</strong> — An interactive biochemistry education platform covering 23 metabolic
-        pathways across carbohydrate, amino acid, lipid, and nucleotide metabolism.
+        <strong>MetaboSim v2.0</strong> — An interactive biochemistry education platform covering 23 metabolic
+        pathways across carbohydrate, amino acid, lipid, and nucleotide metabolism. New in v2.0: ATP/NADH/FADH₂
+        energy badges on all enzyme nodes, clinical case detail modals, and full enzyme-alias resolution.
       </Callout>
       <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.8, marginBottom: '1.25rem' }}>
         MetaboSim lets you simulate real metabolic pathways with adjustable parameters — glucose concentration,
@@ -303,12 +304,24 @@ function PathwayMapContent() {
           <li><span style={{ color: '#6b7280', fontWeight: 700 }}>■ Grey / dim</span> — no simulation data for this node yet</li>
         </ul>
       </Step>
-      <Step num="2" title="Click an Enzyme Node">
+      <Step num="2" title="Read the ATP / NADH / FADH₂ Badges">
+        Every enzyme box now shows small colour-coded pills <em>below</em> its label:
+        <ul style={{ marginTop: '0.5rem', paddingLeft: '1.2rem', lineHeight: 2 }}>
+          <li><span style={{ color: '#ff6b82', fontWeight: 700 }}>ATP↓</span> — this step <strong>consumes</strong> ATP (red pill)</li>
+          <li><span style={{ color: '#00d4ff', fontWeight: 700 }}>ATP↑</span> — this step <strong>produces</strong> ATP (cyan pill)</li>
+          <li><span style={{ color: '#ffcc00', fontWeight: 700 }}>NADH↑</span> — produces NADH reducing equivalent (yellow pill)</li>
+          <li><span style={{ color: '#8090a8', fontWeight: 700 }}>NADH↓</span> — consumes NADH (dim grey pill)</li>
+          <li><span style={{ color: '#fb923c', fontWeight: 700 }}>FADH₂↑</span> — produces FADH₂ (orange pill)</li>
+        </ul>
+        These badges appear on <em>every</em> pathway — glycolysis, TCA, OxPhos, β-oxidation, nucleotide
+        synthesis, etc. They let you trace energy currency flow without running a simulation.
+      </Step>
+      <Step num="3" title="Click an Enzyme Node">
         Clicking any <strong>enzyme box</strong> (rectangular nodes) opens the <em>Enzyme Detail Modal</em>.
         This shows: formal name, EC number, enzymatic class, cofactors, reaction formula, subcellular location,
         allosteric regulators, and a detailed clinical note.
       </Step>
-      <Step num="3" title="Enzyme Detail Modal">
+      <Step num="4" title="Enzyme Detail Modal">
         The modal also shows:
         <ul style={{ marginTop: '0.5rem', paddingLeft: '1.2rem', lineHeight: 2 }}>
           <li>The enzyme's PDB structure ID (links to structural context)</li>
@@ -317,12 +330,13 @@ function PathwayMapContent() {
         </ul>
         Press <kbd style={{ fontFamily: 'var(--font-mono)', padding: '1px 5px', borderRadius: 4, border: '1px solid var(--border)', background: 'var(--bg-surface)' }}>Esc</kbd> or click outside to close.
       </Step>
-      <Step num="4" title="Pathway Navigation">
+      <Step num="5" title="Download Simulation Report">
         Use the <strong>ATP Report</strong> button (📄 icon in the panel header) to download a printable
-        PDF-ready summary of the current simulation, including metrics, enzyme notes, and metabolite table.
+        HTML report of the current simulation, including metrics, enzyme flux table, metabolite concentrations,
+        and per-pathway biochemical breakdown with inhibitors/activators.
       </Step>
       <Callout type="tip">
-        The star (★) beside an enzyme name means it is a <strong>key regulatory enzyme</strong> —
+        The star (★) beside an enzyme name marks it as a <strong>key regulatory enzyme</strong> —
         typically allosteric, rate-limiting, and clinically important.
       </Callout>
     </>
@@ -342,17 +356,19 @@ function ClinicalContent() {
         Carbohydrate disorders, Amino acid disorders, Lipid disorders, Nucleotide disorders,
         Mitochondrial diseases, and Integration cases.
       </Step>
-      <Step num="2" title="Open a Case">
-        Click any case card to reveal the full patient history, lab results, and diagnostic pathway.
-        Work through the questions before revealing the answer.
+      <Step num="2" title="Open a Case — Detail Modal">
+        Click any case card to open a <strong>full-screen modal overlay</strong> showing the complete
+        patient history, clinical presentation, lab results, pathophysiology explanation, and simulation
+        metrics. A <em>"View details →"</em> hint appears on each card. The modal can be dismissed by
+        clicking the × button or the backdrop.
       </Step>
-      <Step num="3" title="Analyse the Enzyme Link">
+      <Step num="3" title="View Simulation">  
+        Inside the case modal, click <strong>View Simulation →</strong> to jump directly to the Simulate
+        page with the relevant pathway pre-loaded — letting you see how the enzyme defect alters real flux.
+      </Step>
+      <Step num="4" title="Analyse the Enzyme Link">
         Each case links the pathophysiology to a specific enzyme defect. The highlighted enzyme name
         is clickable — it opens the same Enzyme Detail Modal as in the Simulation view.
-      </Step>
-      <Step num="4" title="Download Case Report">
-        Use the <strong>Download</strong> button on any case to export a formatted PDF case summary,
-        suitable for revision notes.
       </Step>
       <Callout type="info">
         Clinical cases follow the same metabolic logic as the simulation engine. Running the Simulation
@@ -456,6 +472,10 @@ function FAQContent() {
       q: 'Do the simulation results change between pathways for the same parameters?',
       a: 'Yes — each of the 23 pathway engines is independently implemented and responds to parameters differently. For example, setting Insulin Fold = 4× activates glycogenesis (glycogen synthesis up), suppresses glycogenolysis and FAO, and increases cholesterol synthesis via SREBP-1c induction. Setting Glucagon Fold = 4× has the opposite effects, plus it activates gluconeogenesis, urea cycle (from AA catabolism), and ketogenesis. Comparing multiple pathways under the same parameters is a powerful way to understand metabolic integration.'
     },
+    {
+      q: 'What do the ATP↑ / ATP↓ / NADH↑ / FADH₂↑ badges on enzyme boxes mean?',
+      a: 'These small coloured pill badges appear below each enzyme rectangle on the Pathway Map and indicate the energy currency role of that step. ATP↓ (red) = the enzyme consumes ATP in its reaction. ATP↑ (cyan) = the enzyme produces ATP via substrate-level phosphorylation. NADH↑ (yellow) = the enzyme reduces NAD⁺ to NADH — a reducing equivalent carried to OxPhos for ~2.5 ATP each. FADH₂↑ (orange) = the enzyme produces FADH₂ — carried to ETC Complex II for ~1.5 ATP each. NADH↓ (dim grey) = the enzyme oxidises NADH, consuming the reducing equivalent. These badges are always visible, even before running a simulation, so you can trace energy flow just by reading the map.'
+    },
 
   ];
 
@@ -552,7 +572,7 @@ export default function GuideModule() {
           textAlign: 'center',
           fontSize: '0.8rem', color: 'var(--text-muted)',
         }}>
-          <strong style={{ color: 'var(--text-secondary)' }}>MetaboSim v1.0</strong>
+          <strong style={{ color: 'var(--text-secondary)' }}>MetaboSim v2.0</strong>
           {' '} — Built by{' '}
           <a href="mailto:praizekene1@gmail.com" style={{ color: 'var(--cyan)', textDecoration: 'none' }}>
             Chibuike Praise Okechukwu
