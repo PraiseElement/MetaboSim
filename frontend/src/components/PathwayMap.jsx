@@ -177,6 +177,41 @@ export default function PathwayMap({ pathway, simulationResult, isLoading, onEnz
           .attr('font-weight', isEnzyme ? '600' : '500')
           .text(line);
       });
+
+      // ATP / NADH / FADH2 badges — small pills below enzyme rect
+      if (isEnzyme) {
+        const badges = [];
+        if (node.atp === 'consumed')  badges.push({ text: 'ATP↓', fill: '#ff4d6d33', stroke: '#ff4d6d', textColor: '#ff6b82' });
+        if (node.atp === 'produced')  badges.push({ text: 'ATP↑', fill: '#00d4ff22', stroke: '#00d4ff', textColor: '#00d4ff' });
+        if (node.nadh === 'produced') badges.push({ text: 'NADH↑', fill: '#ffcc0022', stroke: '#ffcc00', textColor: '#ffcc00' });
+        if (node.nadh === 'consumed') badges.push({ text: 'NADH↓', fill: '#ffffff11', stroke: '#607090', textColor: '#8090a8' });
+        if (node.fadh2 === 'produced')badges.push({ text: 'FADH₂↑', fill: '#fb923c22', stroke: '#fb923c', textColor: '#fb923c' });
+
+        const bw = 36, bh = 11, gap = 3;
+        const totalW = badges.length * bw + (badges.length - 1) * gap;
+        const startX = -totalW / 2;
+        const baseY = 22; // below the rect (rect h=30, half=15, +7 pad)
+
+        badges.forEach((b, bi) => {
+          const bx = startX + bi * (bw + gap);
+          const bg = g.append('g').attr('transform', `translate(${bx + bw/2}, ${baseY})`);
+          bg.append('rect')
+            .attr('x', -bw/2).attr('y', -bh/2)
+            .attr('width', bw).attr('height', bh)
+            .attr('rx', 3)
+            .attr('fill', b.fill)
+            .attr('stroke', b.stroke)
+            .attr('stroke-width', 0.6);
+          bg.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', 4)
+            .attr('font-size', '7px')
+            .attr('font-family', 'Inter, sans-serif')
+            .attr('font-weight', '700')
+            .attr('fill', b.textColor)
+            .text(b.text);
+        });
+      }
     }
   }, [pathwayDef, enzymeStatus, simulationResult]);
 

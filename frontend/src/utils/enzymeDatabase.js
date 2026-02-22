@@ -1651,12 +1651,54 @@ export const ENZYME_DB = {
 
 
 /**
+ * Alias map: pathway/simulation enzyme_id → DB key.
+ * Add here whenever a viz/engine ID differs from the DB key.
+ */
+const ENZYME_ALIASES = {
+  // Glycolysis
+  PFK1:   'PFK',    // Phosphofructokinase-1 → PFK
+  ALD:    'ALDO',   // Aldolase → ALDO
+  // TCA
+  ACN:    'ACON',   // Aconitase → ACON
+  // Gluconeogenesis
+  LDH_R:  'LDH',   // Reverse LDH
+  PGI_R:  'PGI',   // Reverse PGI
+  // Glycogenolysis
+  PGM2:   'PGM',   // Phosphoglucomutase (alt id)
+  G6P:    'G6PASE',// G6Pase (alt id)
+  // Galactose
+  PGM3:   'PGM',   // Phosphoglucomutase (galactose)
+  // Glycogenesis
+  HK2:    'HK',    // Hexokinase-2
+  PGMgs:  'PGM',
+  // Amino acid
+  PDC:    'PDH',   // PDH Complex (alt id)
+  GDH_s:  'GDH',
+  AST_s:  'AST',
+  // AA synthesis
+  GS:     'GS',
+  // Integrated
+  i_HK:   'HK',   i_PFK1:  'PFK',   i_PK:   'PK',
+  i_LDH:  'LDH',  i_PDH:   'PDH',   i_CS:   'CS',
+  i_IDH:  'IDH',  i_MDH:   'MDH',   i_CI:   'CI',
+  i_CV:   'CV',   i_PEPCK: 'PEPCK', i_G6PASE:'G6PASE',
+};
+
+/**
  * Get enzyme data by enzyme_id from the simulation result.
- * enzyme_id matches the key used in ENZYME_DB.
+ * Tries: exact key → alias map → strip trailing digits → case-insensitive scan.
  */
 export function getEnzymeData(enzymeId) {
   if (!enzymeId) return null;
-  return ENZYME_DB[enzymeId.toUpperCase()]
-    || Object.values(ENZYME_DB).find(e => e.id.toLowerCase() === enzymeId.toLowerCase())
-    || null;
+  const id = enzymeId.toUpperCase();
+  return (
+    ENZYME_DB[id]
+    || ENZYME_DB[ENZYME_ALIASES[id]]
+    || ENZYME_DB[ENZYME_ALIASES[enzymeId]]
+    || ENZYME_DB[id.replace(/\d+$/, '')]          // PFK1 → PFK
+    || ENZYME_DB[id.replace(/_R$/i, '')]           // LDH_R → LDH
+    || Object.values(ENZYME_DB).find(e => e.id?.toLowerCase() === enzymeId.toLowerCase())
+    || null
+  );
 }
+
