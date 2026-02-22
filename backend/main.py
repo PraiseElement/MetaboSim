@@ -307,7 +307,7 @@ def _detect_scenario(params: dict) -> str:
 
 @app.get("/")
 def health():
-    return {"status": "ok", "service": "MetaboSim API", "version": "1.0.0"}
+    return {"status": "ok", "service": "MetaboSim API", "version": "2.0.0"}
 
 
 @app.get("/api/pathways")

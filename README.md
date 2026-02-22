@@ -134,7 +134,7 @@ MetaboSim
     │   │   ├── QuizModule.jsx       # 24-category quiz
     │   │   └── GuideModule.jsx      # Built-in user guide
     │   ├── utils/
-    │   │   ├── enzymeDatabase.js    # 134+ enzyme profiles
+    │   │   ├── enzymeDatabase.js    # 150+ enzyme profiles
     │   │   ├── pathwayData.js       # SVG node/edge definitions for 23 pathways
     │   │   ├── api.js               # Fetch wrappers
     │   │   └── downloadReport.js    # PDF report generator

@@ -186,7 +186,7 @@ export default function Header({ activePage, onNavigate }) {
           fontSize: '0.68rem', fontWeight: 700,
           letterSpacing: '0.06em', fontFamily: 'var(--font-mono)',
         }}>
-          v1.0
+          v2.0
         </div>
       </div>
     </header>

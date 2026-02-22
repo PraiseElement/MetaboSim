@@ -196,7 +196,7 @@ function OverviewContent() {
       }}>
         {[
           { n: '23', label: 'Metabolic Pathways' },
-          { n: '134+', label: 'Enzyme Entries' },
+          { n: '150+', label: 'Enzyme Entries' },
           { n: '24', label: 'Quiz Categories' },
           { n: '50+', label: 'Clinical Cases' },
         ].map(s => (
