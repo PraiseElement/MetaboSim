@@ -1149,20 +1149,18 @@ export default function ClinicalModule({ onNavigate }) {
                 </div>
               </div>
             )}
+            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+              <button id="btn-view-simulation" className="btn btn-primary" onClick={() => { closeModal(); onNavigate('simulate'); }}>
+                ⬡ View Full Simulation
+              </button>
+              <button id="btn-take-related-quiz" className="btn btn-secondary" onClick={() => { closeModal(); onNavigate('quiz'); }}>
+                ◆ Take the Quiz
+              </button>
+              <button className="btn btn-secondary" onClick={closeModal} style={{ marginLeft: 'auto' }}>
+                ✕ Close
+              </button>
+            </div>
           </div>
-
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
-            <button id="btn-view-simulation" className="btn btn-primary" onClick={() => { closeModal(); onNavigate('simulate'); }}>
-              ⬡ View Full Simulation
-            </button>
-            <button id="btn-take-related-quiz" className="btn btn-secondary" onClick={() => { closeModal(); onNavigate('quiz'); }}>
-              ◆ Take the Quiz
-            </button>
-            <button className="btn btn-secondary" onClick={closeModal} style={{ marginLeft: 'auto' }}>
-              ✕ Close
-            </button>
-          </div>
-        </div>
         </div>
       )}
     </div>
