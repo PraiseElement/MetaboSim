@@ -7,8 +7,10 @@ services:
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: "3.11.0"
+      - key: PYTHONVERSION
+        value: "3.11.0"
       - key: ALLOWED_ORIGINS
-        sync: false # fill this in on Render dashboard with your Vercel URL
+        sync: false   # fill in your Vercel URL after first deploy
     healthCheckPath: /
     autoDeploy: true
