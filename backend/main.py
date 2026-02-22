@@ -12,6 +12,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any, List
 import time
+import os
 
 from models.simulation import SimulationRequest, SimulationResult
 from engine.glycolysis import simulate_glycolysis
@@ -49,10 +50,19 @@ app = FastAPI(
     version="2.0.0",
 )
 
-# Allow all origins for local development
+# CORS — in production set ALLOWED_ORIGINS env var to your Vercel URL(s)
+# e.g. ALLOWED_ORIGINS=https://metabosim.vercel.app,https://metabosim-*.vercel.app
+_raw_origins = os.environ.get("ALLOWED_ORIGINS", "")
+ALLOWED_ORIGINS: list[str] = (
+    [o.strip() for o in _raw_origins.split(",") if o.strip()]
+    if _raw_origins
+    else ["*"]  # permissive for local dev
+)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=r"https://.*\.vercel\.app" if not _raw_origins else None,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
