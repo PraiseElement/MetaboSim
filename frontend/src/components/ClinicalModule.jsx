@@ -888,6 +888,7 @@ const CATEGORIES = [...new Set(CLINICAL_CASES.map(c => c.category))];
 
 export default function ClinicalModule({ onNavigate }) {
   const [selected, setSelected] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const [simResult, setSimResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [activeCategory, setActiveCategory] = useState('All');
@@ -895,6 +896,7 @@ export default function ClinicalModule({ onNavigate }) {
   const runCase = async (c) => {
     setSelected(c);
     setSimResult(null);
+    setModalOpen(true);
     setLoading(true);
     try {
       const r = await runSimulation(c.params);
@@ -904,6 +906,8 @@ export default function ClinicalModule({ onNavigate }) {
     }
     setLoading(false);
   };
+
+  const closeModal = () => { setModalOpen(false); };
 
   const filtered = activeCategory === 'All'
     ? CLINICAL_CASES
@@ -978,22 +982,60 @@ export default function ClinicalModule({ onNavigate }) {
             <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
               {c.subtitle}
             </div>
-            <div style={{
-              marginTop: '0.6rem', padding: '2px 7px', borderRadius: 99,
-              fontSize: '0.67rem', fontWeight: 600, display: 'inline-block',
-              background: `${c.color}12`, color: c.color,
-              border: `1px solid ${c.color}30`,
-            }}>{c.category}</div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.6rem' }}>
+              <div style={{
+                padding: '2px 7px', borderRadius: 99,
+                fontSize: '0.67rem', fontWeight: 600, display: 'inline-block',
+                background: `${c.color}12`, color: c.color,
+                border: `1px solid ${c.color}30`,
+              }}>{c.category}</div>
+              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', letterSpacing: '0.02em' }}>View details →</div>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Selected case detail */}
-      {selected && (
-        <div className="animate-in">
-          <div className="card" style={{ borderColor: selected.color + '55', marginBottom: '1rem' }}>
+      {/* ── Clinical Case Modal ─────────────────────────────────── */}
+      {modalOpen && selected && (
+        <div
+          style={{
+            position: 'fixed', inset: 0, zIndex: 1200,
+            background: 'rgba(0,0,0,0.75)',
+            backdropFilter: 'blur(7px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '1rem',
+            animation: 'fadeIn 0.18s ease',
+          }}
+          onClick={closeModal}
+        >
+          <div
+            className="card"
+            style={{
+              borderColor: selected.color + '66',
+              maxWidth: 620, width: '100%',
+              maxHeight: '90vh', overflowY: 'auto',
+              position: 'relative',
+              animation: 'fadeInUp 0.22s cubic-bezier(0.4,0,0.2,1)',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={closeModal}
+              style={{
+                position: 'absolute', top: 14, right: 14,
+                background: 'var(--bg-surface)', border: '1px solid var(--border)',
+                borderRadius: 8, width: 30, height: 30,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', color: 'var(--text-muted)', fontSize: '1rem',
+                transition: 'all var(--transition)',
+              }}
+              onMouseEnter={e => { e.target.style.color = 'var(--text-primary)'; }}
+              onMouseLeave={e => { e.target.style.color = 'var(--text-muted)'; }}
+            >✕</button>
+
             {/* Header row */}
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', marginBottom: '1.25rem', paddingRight: '2.5rem' }}>
               <div style={{
                 width: 52, height: 52, flexShrink: 0,
                 background: `${selected.color}18`, border: `1px solid ${selected.color}44`,
@@ -1109,14 +1151,18 @@ export default function ClinicalModule({ onNavigate }) {
             )}
           </div>
 
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <button id="btn-view-simulation" className="btn btn-primary" onClick={() => onNavigate('simulate')}>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
+            <button id="btn-view-simulation" className="btn btn-primary" onClick={() => { closeModal(); onNavigate('simulate'); }}>
               ⬡ View Full Simulation
             </button>
-            <button id="btn-take-related-quiz" className="btn btn-secondary" onClick={() => onNavigate('quiz')}>
+            <button id="btn-take-related-quiz" className="btn btn-secondary" onClick={() => { closeModal(); onNavigate('quiz'); }}>
               ◆ Take the Quiz
             </button>
+            <button className="btn btn-secondary" onClick={closeModal} style={{ marginLeft: 'auto' }}>
+              ✕ Close
+            </button>
           </div>
+        </div>
         </div>
       )}
     </div>
