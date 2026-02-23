@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
@@ -12,6 +12,9 @@ import GuideModule from './components/GuideModule';
 import EnzymeModal from './components/EnzymeModal';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
+// Backend root URL (same env var as api.js, but without /api suffix)
+const BACKEND_ROOT = import.meta.env.VITE_API_URL || '';
+
 export default function App() {
   const [activePage, setActivePage] = useState('dashboard');
   const [simulationResult, setSimulationResult] = useState(null);
@@ -19,6 +22,12 @@ export default function App() {
   const [selectedEnzyme, setSelectedEnzyme] = useState(null);
   const [enzymeModal, setEnzymeModal] = useState(null); // enzyme clicked in PathwayMap
   const [isLoading, setIsLoading] = useState(false);
+
+  // Silent wake-up ping — fires once on mount to warm the Render backend
+  // after it has spun down due to inactivity. No UI impact; errors swallowed.
+  useEffect(() => {
+    fetch(`${BACKEND_ROOT}/`).catch(() => {});
+  }, []);
 
   const handleSimulationResult = useCallback((result) => {
     setSimulationResult(result);
